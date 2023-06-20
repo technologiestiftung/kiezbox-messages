@@ -4,6 +4,17 @@ Tested with Python 3.11.4
 
 ## Installation guide
 
+### Set your virtual environment
+
+The following steps are not required but recommended. This will allow you to install packages in your isolated virtual environment instead of globally, reducing the risk of breaking system tools or other projects.
+
+1. Install [pyenv](https://github.com/pyenv/pyenv) and the [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) plugin.
+2. Download the appropriate Python version with `pyenv install 3.11.4` in the command line.
+3. Create a virtual environment with the appropriate Python version and name for your environment, for example `pyenv virtualenv 3.11.4 kiezbox`
+4. Activate the environment with `pyenv activate kiezbox`
+
+### Run the API
+
 1. Move to the `/backend` directory.
 2. Install the required libraries with the command line `pip install -r requirements.txt`
 3. Run the server with the command line `uvicorn main:app --reload`
