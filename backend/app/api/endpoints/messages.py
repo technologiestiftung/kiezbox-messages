@@ -1,34 +1,15 @@
 from typing import Any, List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app import crud, models, schemas
-from app.schemas.message import Message, MessageCreate
 from app.api import deps
 from app.crud import crud_message
+from app.schemas.message import Message, MessageCreate
 
 
 router = APIRouter()
 
-# TODO: Dummy response, delete later
-dummy_msg_1 = {
-    "id": 0,
-    "name": "Juanito",
-    "address": "Grunewaldstrasse 61",
-    "problem": "We ran out of Apfelschorle",
-    "number_affected_ppl": 10,
-    "datetime": "19.06.2023"
-}
-
-dummy_msg_2 = {
-    "id": 1,
-    "name": "Pepito",
-    "address": "Grunewaldstrasse 61",
-    "problem": "The coffee machine broke",
-    "number_affected_ppl": 10,
-    "datetime": "19.06.2023"
-}
 
 @router.get("/", response_model=List[Message])
 async def read_messages(

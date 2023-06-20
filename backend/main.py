@@ -2,8 +2,7 @@ from fastapi import FastAPI
 
 from app.api.api import api_router
 from app.core.config import settings
-from app import crud, models, schemas
-from app.db.session import SessionLocal, engine, Base
+from app.db.session import engine, Base
 
 Base.metadata.create_all(bind=engine)
 
