@@ -24,4 +24,8 @@ The following steps are not required but recommended. This will allow you to ins
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 ```
 
-Open this URL with the `/docs` suffix in your server to access the Swagger documentation of the API. For this example: `http://127.0.0.1:8000/docs`
+Open this URL with the `/docs` suffix in your server to access the Swagger documentation of the API. For this example: `http://127.0.0.1:8000/docs
+
+### Update the API
+
+If you want to run an updated version of the API which introduces changes in the database models (for example, a new field), you will have to wipe the database clean first. To do this, simply delete the `backend.db` file.
