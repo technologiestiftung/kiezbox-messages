@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 
 # Shared properties
@@ -25,10 +25,14 @@ class MessageUpdate(MessageBase):
 # Properties shared by models stored in DB
 class MessageInDBBase(MessageBase):
     id: int
-    timestamp: Optional[datetime] = Field(default_factory=datetime.now)
+    timestamp: datetime
+
+    @validator("timestamp", pre=True, always=True)
+    def set_timestamp(cls, v):
+        return v or datetime.now()
 
     class Config:
-        orm_mode = True   
+        orm_mode = True
 
 
 # Properties to return to client
