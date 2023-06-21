@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -24,8 +25,8 @@ class MessageUpdate(MessageBase):
 # Properties shared by models stored in DB
 class MessageInDBBase(MessageBase):
     id: int
-#    datetime: datetime = Field(default_factory=datetime.now) TODO: This line is throwing an error
-    
+    timestamp: Optional[datetime] = Field(default_factory=datetime.now)
+
     class Config:
         orm_mode = True   
 
