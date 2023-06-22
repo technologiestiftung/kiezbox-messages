@@ -10,7 +10,9 @@ from starlette.responses import FileResponse
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title=settings.PROJECT_NAME, openapi_url=f"{settings.API_STR}/openapi.json")
+app = FastAPI(
+    title=settings.PROJECT_NAME, openapi_url=f"{settings.API_STR}/openapi.json"
+)
 
 out_folder = os.path.abspath("out")
 
@@ -30,12 +32,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 app.include_router(api_router, prefix=settings.API_STR)
-
-@app.get("/")
-def get_index():
-    return FileResponse(os.path.join(out_folder, "index.html"))
 
 @app.get("/emergency")
 def get_emergency():
@@ -45,4 +42,4 @@ def get_emergency():
 def get_inbox():
     return FileResponse(os.path.join(out_folder, "inbox.html"))
 
-app.mount("/static", StaticFiles(directory=out_folder), name="static")
+app.mount("/", StaticFiles(directory=out_folder, html=True), name="static")
