@@ -1,0 +1,10 @@
+1:HL["/_next/static/media/2aaf0723e720e8b9-s.p.woff2",{"as":"font","type":"font/woff2"}]
+2:HL["/_next/static/css/9c72146cfcf85cf7.css",{"as":"style"}]
+3:HL["/_next/static/css/495c255344c060a8.css",{"as":"style"}]
+0:["aqNG9l8CX7rkWi5UqsqE7",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L4",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/9c72146cfcf85cf7.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/css/495c255344c060a8.css","precedence":"next"}]],["$L5",["$","meta",null,{"name":"next-size-adjust"}]]]]]]
+6:I{"id":"3211","chunks":["272:static/chunks/webpack-24cb11fba49c76b6.js","253:static/chunks/bce60fc1-49ee79ad31766ac6.js","769:static/chunks/769-b54bf0e157dd8977.js"],"name":"","async":false}
+7:I{"id":"5767","chunks":["272:static/chunks/webpack-24cb11fba49c76b6.js","253:static/chunks/bce60fc1-49ee79ad31766ac6.js","769:static/chunks/769-b54bf0e157dd8977.js"],"name":"","async":false}
+8:I{"id":"7396","chunks":["272:static/chunks/webpack-24cb11fba49c76b6.js","253:static/chunks/bce60fc1-49ee79ad31766ac6.js","769:static/chunks/769-b54bf0e157dd8977.js"],"name":"","async":false}
+9:I{"id":"3768","chunks":["629:static/chunks/629-b4957bc37739779f.js","931:static/chunks/app/page-dee71890f309315f.js"],"name":"","async":false}
+4:[["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__className_0ec1f4","children":["$","$L6",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","loading":"$undefined","loadingStyles":"$undefined","hasLoading":false,"template":["$","$L7",null,{}],"templateStyles":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","childProp":{"current":[["$","$L8",null,{"propsForComponent":{"params":{}},"Component":"$9"}],null],"segment":"__PAGE__"},"styles":[]}]}]}],null]
+5:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"KiezBox Emergency Call"}],["$","meta","2",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","link","3",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"any"}]]
