@@ -20,12 +20,14 @@ extra_origin = os.getenv('UVICORN_HOST')
 # Enable CORS
 origins = [
     "http://localhost",
-    "http://127.0.0.1:8080",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
     "http://localhost:8080",
     "http://localhost:3030"
 ]
 if extra_origin:
     origins.append(extra_origin)
+    origins.append(f"{extra_origin}:8000")
 
 app.add_middleware(
     CORSMiddleware,
