@@ -1,7 +1,9 @@
+import json
 from typing import Any, List
 
 import asyncio
 from fastapi import APIRouter, Depends, Request
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from sse_starlette.sse import EventSourceResponse
 
@@ -21,7 +23,8 @@ async def messages_event_generator(
     request,
     db: Session = Depends(deps.get_db),
     skip: int = 0,
-    limit: int = 100):
+    limit: int = 100
+):
     """
     Get status as an event generator.
     """
@@ -32,14 +35,9 @@ async def messages_event_generator(
             break
 
         # Check for new messages and return them to client if any
-        # TODO: Convert response to a readable format for frontend
         current_messages = crud_message.message.get_multi(db, skip=skip, limit=limit)
         if len(current_messages) > len(previous_messages):
-            yield {
-                "event": "update",
-                "retry": STREAM_TIMEOUT,
-                "data": current_messages
-            }
+            yield json.dumps(jsonable_encoder(current_messages))
 
             previous_messages = current_messages
 
@@ -57,6 +55,7 @@ async def read_messages_stream(
     Retrieve messages and refresh with every new incoming message.
     """
     event_generator = messages_event_generator(request, db, skip=skip, limit=limit)
+
     return EventSourceResponse(event_generator)
 
 
