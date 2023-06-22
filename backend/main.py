@@ -15,7 +15,7 @@ app = FastAPI(
 )
 
 out_folder = os.path.abspath("out")
-
+extra_origin = os.getenv('UVICORN_HOST')
 
 # Enable CORS
 origins = [
@@ -23,6 +23,8 @@ origins = [
     "http://localhost:8080",
     "http://localhost:3030"
 ]
+if extra_origin:
+    origins.append(extra_origin)
 
 app.add_middleware(
     CORSMiddleware,
