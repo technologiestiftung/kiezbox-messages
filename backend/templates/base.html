@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{url_for('static',path='/css/app.css')}}" rel="stylesheet">
+    <script src="{{url_for('static',path='/js/htmx.min.js')}}" defer></script>
+    <script src="{{url_for('static',path='/js/sse.js')}}" defer></script>
+    <title>{% block title %}{% endblock %} - Kiezbox Notruf-App</title>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2024 by <a href="https://technologiestiftung-berlin.de">Technologiestiftung Berlin</a>.
+        {% endblock %}
+    </div>
+</body>
+</html>

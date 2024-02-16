@@ -1,0 +1,4 @@
+fastapi<1
+sse-starlette
+sqlmodel<0.1
+uvicorn[standard]<1

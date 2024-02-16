@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Notruf absetzen{% endblock %}
+{% block content %}
+<main class="flex min-h-screen flex-col items-center justify-between p-24">
+    <div class="z-10 w-full max-w-3xl items-center justify-start font-mono text-sm flex flex-col gap-4">
+        <h1 class="text-xl">Kiezbox Notruf</h1>
+        <p>Fülle die Form aus um einen Notruf abzusetzen</p>
+        <form class="w-full flex flex-col items-center gap-1.5">
+            <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
+                <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="callerName">
+                    <strong>Name</strong>
+                </label>
+                <input type="text"
+                    class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    id="callerName" placeholder="Wer bist du?" />
+            </div>
+            <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
+                <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="address">
+                    <strong>Adresse</strong>
+                </label>
+                <input type="text"
+                    class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    id="address" placeholder="Wo befindest du dich gerade?" />
+            </div>
+            <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
+                <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="problem">
+                    <strong>Was ist passiert?</strong>
+                </label>
+                <input type="text"
+                    class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    id="problem" placeholder="Beschreibe die Art des Notfalls" />
+            </div>
+            <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
+                <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="number_affected_ppl">
+                    <strong>Wie viele Personen sind betroffen?</strong>
+                </label>
+                <input
+                    type="number"
+                    class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    id="number_affected_ppl" placeholder="" />
+            </div>
+            <button
+                class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4 mt-4 w-full max-w-sm"
+                type="submit">Notruf abschicken
+            </button>
+        </form>
+    </div>
+    <a class="pt-16" href="/">← Zurück</a>
+</main>
+{% endblock %}
