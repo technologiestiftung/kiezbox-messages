@@ -5,7 +5,8 @@
     <div class="z-10 w-full max-w-3xl items-center justify-start font-mono text-sm flex flex-col gap-4">
         <h1 class="text-xl">Kiezbox Notruf</h1>
         <p>Fülle die Form aus um einen Notruf abzusetzen</p>
-        <form class="w-full flex flex-col items-center gap-1.5">
+        <!-- Still unsure how to implement confirmation, some options listed here https://devsheet.com/htmx-send-post-request-form-submit/ -->
+        <form class="w-full flex flex-col items-center gap-1.5" hx-post="/api/messages/" hx-swap="outerHTML" hx-trigger="submit">
             <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
                 <label
                     class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

@@ -1,4 +1,5 @@
 fastapi<1
-sse-starlette
+jinja2<4
+sse-starlette<3
 sqlmodel<0.1
 uvicorn[standard]<1

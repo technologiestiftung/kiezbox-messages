@@ -3,9 +3,9 @@
 <head>
     {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="{{url_for('static',path='/css/app.css')}}" rel="stylesheet">
-    <script src="{{url_for('static',path='/js/htmx.min.js')}}" defer></script>
-    <script src="{{url_for('static',path='/js/sse.js')}}" defer></script>
+    <link href="{{ url_for('static', path='/css/app.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='/js/htmx.min.js') }}" defer></script>
+    <script src="{{ url_for('static', path='/js/sse.js') }}" defer></script>
     <title>{% block title %}{% endblock %} - Kiezbox Notruf-App</title>
     {% endblock %}
 </head>

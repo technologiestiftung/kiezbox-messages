@@ -8,38 +8,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseSettings
 from fastapi import FastAPI, Query, Request
 from sqlalchemy import Column, DateTime, func
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from sse_starlette import EventSourceResponse
 
 
-class Settings(BaseSettings):
-    API_STR: str = "/api"
-    PROJECT_NAME: str = "kiezbox-backend"
-    SQLALCHEMY_DATABASE_URL = "sqlite:///./backend.db"
+extra_origin = os.getenv("UVICORN_HOST")
 
-    class Config:
-        case_sensitive = True
-
-
-settings = Settings()
-extra_origin = os.getenv('UVICORN_HOST')
-
-app = FastAPI(
-    title=settings.PROJECT_NAME, openapi_url=f"{settings.API_STR}/openapi.json"
-)
-app.mount("/static", StaticFiles(directory="static"))
-# app.add_middleware(GZipMiddleware)  # middleware except for SSE
+app = FastAPI(title="kiezbox-backend", openapi_url="/api/openapi.json")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.add_middleware(GZipMiddleware)  # enable middleware except for SSE
 templates = Jinja2Templates(directory="templates")
 
 # Enable CORS
-origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:3030"
-]
+origins = ["http://localhost", "http://localhost:8080", "http://localhost:3030"]
 if extra_origin:
     origins.append(extra_origin)
     origins.append(f"{extra_origin}:8000")
@@ -54,17 +37,18 @@ app.add_middleware(
 
 
 class Message(SQLModel, table=True):
-    
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
     address: str
-    problem: str 
+    problem: str
     number_affected_ppl: str
-    timestamp: Optional[date] = Field(sa_column=Column(DateTime(timezone=True), index=True, server_default=func.now()))
+    timestamp: Optional[date] = Field(
+        sa_column=Column(DateTime(timezone=True), index=True, server_default=func.now())
+    )
 
 
 connect_args = {"check_same_thread": False}
-engine = create_engine(settings.SQLALCHEMY_DATABASE_URL, connect_args=connect_args)
+engine = create_engine("sqlite:///./backend.db", connect_args=connect_args)
 
 
 def init_db():
@@ -85,7 +69,7 @@ async def messages_event_generator(
     request,
     skip: int = 0,
     limit: int = Query(default=100, le=100),
-    as_html: bool = False
+    as_html: bool = False,
 ):
     """
     Get status as an event generator.
@@ -98,10 +82,19 @@ async def messages_event_generator(
                 break
 
             # Check for new messages and return them to client if any
-            current_messages = session.exec(select(Message).order_by(Message.c.timestamp.desc()).offset(skip).limit(limit)).all()
+            current_messages = session.exec(
+                select(Message)
+                .order_by(Message.timestamp.desc())
+                .offset(skip)
+                .limit(limit)
+            ).all()
             if len(current_messages) > len(previous_messages):
                 if as_html:
-                    yield templates.TemplateResponse(request=request, name='inbox_content.html', context={'messages': current_messages})
+                    yield templates.TemplateResponse(
+                        request=request,
+                        name="inbox_content.html",
+                        context={"messages": current_messages},
+                    )
                 else:
                     yield json.dumps(jsonable_encoder(current_messages))
 
@@ -112,9 +105,7 @@ async def messages_event_generator(
 
 @app.get("/api/messages/stream", response_model=List[Message])
 async def read_messages_stream(
-    request: Request,
-    skip: int = 0,
-    limit: int = Query(default=100, le=100)
+    request: Request, skip: int = 0, limit: int = Query(default=100, le=100)
 ):
     """
     Retrieve messages and refresh with every new incoming message.
@@ -127,17 +118,38 @@ async def read_messages_stream(
 @app.get("/api/messages/", response_model=List[Message])
 async def read_messages(skip: int = 0, limit: int = Query(default=100, le=100)):
     with Session(engine) as session:
-        messages = session.exec(select(Message).order_by(Message.c.timestamp.desc()).offset(skip).limit(limit)).all()
+        messages = session.exec(
+            select(Message).order_by(Message.timestamp.desc()).offset(skip).limit(limit)
+        ).all()
         return messages
 
 
+# # May need to use this https://fastapi.tiangolo.com/tutorial/request-forms/
 @app.post("/api/messages/", response_model=Message)
-async def send_message(message: Message):
+async def send_message_api(message: Message):
     with Session(engine) as session:
         session.add(message)
         session.commit()
         session.refresh(message)
         return message
+
+
+# Returning HTML on post is not the right way
+# # May need to use this https://fastapi.tiangolo.com/tutorial/request-forms/
+# @app.post("/message", response_model=HTMLResponse)
+# async def send_message(message: Message):
+#     with Session(engine) as session:
+#         session.add(message)
+#         session.commit()
+#         session.refresh(message)
+#         return HTMLResponse(
+#             """
+#             <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
+#                 <p>Ihr Notruf wurde erfolgreich abgesetzt
+#                 </p>
+#             </div>
+#             """
+#         )
 
 
 @app.get("/emergency", response_class=HTMLResponse)
@@ -152,14 +164,14 @@ def get_inbox(request: Request):
 
 @app.get("/inbox/stream", response_model=List[Message])
 async def inbox_html_stream(
-    request: Request,
-    skip: int = 0,
-    limit: int = Query(default=100, le=100)
+    request: Request, skip: int = 0, limit: int = Query(default=100, le=100)
 ):
     """
     Retrieve messages as HTML and refresh with every new incoming message.
     """
-    event_generator = messages_event_generator(request, skip=skip, limit=limit, as_html=True)
+    event_generator = messages_event_generator(
+        request, skip=skip, limit=limit, as_html=True
+    )
 
     return EventSourceResponse(event_generator, send_timeout=5)
 
