@@ -1,13 +1,16 @@
-{% extends 'base.html' %}
-{% block title %}Inbox{% endblock %}
-{% block content %}
-<main class="flex min-h-screen flex-col items-center justify-between p-24">
-    <div class="z-10 w-full max-w-3xl items-start justify-start font-mono text-sm flex flex-col gap-4">
-        <h1 class="text-xl">Notruf Ticker</h1>
-        <div hx-ext="sse" sse-connect="/inbox/stream" sse-swap="message">
-            Noch keine Notrufe vorhanden
-        </div>
+{% extends 'base.html' %} {% block title %}Inbox{% endblock %} {% block content
+%}
+<main
+  class="flex min-h-screen flex-col items-center justify-between p-24 font-mono"
+>
+  <div
+    class="z-10 w-full max-w-3xl items-start justify-start text-sm flex flex-col gap-4"
+  >
+    <h1 class="text-xl">Notruf Ticker</h1>
+    <div hx-ext="sse" sse-connect="/inbox/stream" sse-swap="message">
+      Noch keine Notrufe vorhanden
     </div>
-    <a class="pt-16" href="/">← Zurück</a>
+  </div>
+  <a class="pt-16" href="/">← Zurück</a>
 </main>
 {% endblock %}

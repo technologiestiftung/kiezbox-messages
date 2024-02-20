@@ -694,6 +694,11 @@ body {
   background-color: transparent;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .p-24 {
   padding: 6rem;
 }
