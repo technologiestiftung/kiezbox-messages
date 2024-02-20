@@ -33,6 +33,8 @@ pydantic-core==2.16.2
     # via pydantic
 python-dotenv==1.0.1
     # via uvicorn
+python-multipart==0.0.9
+    # via -r requirements.in
 pyyaml==6.0.1
     # via uvicorn
 sniffio==1.3.0

@@ -2,13 +2,13 @@ import asyncio
 from datetime import date
 import json
 import os
-from typing import List, Optional
+from typing import Annotated, List, Optional
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi import FastAPI, Query, Request
+from fastapi import FastAPI, Form, Query, Request
 from sqlalchemy import Column, DateTime, func
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from sse_starlette import EventSourceResponse
@@ -124,7 +124,6 @@ async def read_messages(skip: int = 0, limit: int = Query(default=100, le=100)):
         return messages
 
 
-# # May need to use this https://fastapi.tiangolo.com/tutorial/request-forms/
 @app.post("/api/messages/", response_model=Message)
 async def send_message_api(message: Message):
     with Session(engine) as session:
@@ -134,22 +133,32 @@ async def send_message_api(message: Message):
         return message
 
 
-# Returning HTML on post is not the right way
-# # May need to use this https://fastapi.tiangolo.com/tutorial/request-forms/
-# @app.post("/message", response_model=HTMLResponse)
-# async def send_message(message: Message):
-#     with Session(engine) as session:
-#         session.add(message)
-#         session.commit()
-#         session.refresh(message)
-#         return HTMLResponse(
-#             """
-#             <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
-#                 <p>Ihr Notruf wurde erfolgreich abgesetzt
-#                 </p>
-#             </div>
-#             """
-#         )
+@app.post("/messages", response_class=HTMLResponse)
+async def send_message(
+    name: Annotated[str, Form()],
+    address: Annotated[str, Form()],
+    problem: Annotated[str, Form()],
+    number_affected_ppl: Annotated[int, Form()],
+):
+    message = Message(
+        name=name,
+        address=address,
+        problem=problem,
+        number_affected_ppl=number_affected_ppl,
+    )
+    with Session(engine) as session:
+        session.add(message)
+        session.commit()
+        # session.refresh(message)
+
+    return HTMLResponse(
+        """
+        <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
+            <p>Ihr Notruf wurde erfolgreich abgesetzt
+            </p>
+        </div>
+        """
+    )
 
 
 @app.get("/emergency", response_class=HTMLResponse)

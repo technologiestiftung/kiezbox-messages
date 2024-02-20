@@ -1,5 +1,6 @@
 fastapi<1
 jinja2<4
+python-multipart<1
 sse-starlette<3
 sqlmodel<0.1
 uvicorn[standard]<1
