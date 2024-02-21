@@ -188,7 +188,10 @@ async def inbox_html_stream(
 
     return EventSourceResponse(event_generator, send_timeout=5)
 
-
+@app.get("/generate_204")
+@app.get("/hotspot-detect.html")
+@app.get("/gen_204")
+@app.get("/success.txt")
 @app.get("/", response_class=HTMLResponse)
 async def homepage(request: Request):
     return templates.TemplateResponse(request=request, name="index.html")
