@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
+  <head>
     {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="{{ url_for('static', path='/css/app.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', path='/js/htmx.min.js') }}" defer></script>
+    <link
+      href="{{ url_for('static', path='/css/app.css') }}"
+      rel="stylesheet"
+    />
+    <script
+      src="{{ url_for('static', path='/js/htmx.min.js') }}"
+      defer
+    ></script>
     <script src="{{ url_for('static', path='/js/sse.js') }}" defer></script>
     <title>{% block title %}{% endblock %} - Kiezbox Notruf-App</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ url_for('static', path='/images/apple-touch-icon.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{ url_for('static', path='/images/favicon-32x32.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{ url_for('static', path='/images/favicon-16x16.png') }}"
+    />
+    <link
+      rel="manifest"
+      href="{{ url_for('static', path='/images/site.webmanifest') }}"
+    />
     {% endblock %}
-</head>
-<body>
+  </head>
+  <body>
     <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
-        {% block footer %}
-        &copy; Copyright 2024 by <a href="https://technologiestiftung-berlin.de">Technologiestiftung Berlin</a>.
-        {% endblock %}
+    <div id="footer" class="p-4 font-mono text-sm">
+      {% block footer %} &copy; Copyright 2024 by
+      <a href="https://www.technologiestiftung-berlin.de/"
+        >Technologiestiftung Berlin</a
+      >. {% endblock %}
     </div>
-</body>
+  </body>
 </html>
