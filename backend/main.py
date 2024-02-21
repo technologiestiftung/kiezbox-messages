@@ -1,5 +1,5 @@
 import asyncio
-from datetime import date
+from datetime import datetime
 import json
 import os
 from typing import Annotated, List, Optional
@@ -42,7 +42,7 @@ class Message(SQLModel, table=True):
     address: str
     problem: str
     number_affected_ppl: str
-    timestamp: Optional[date] = Field(
+    timestamp: Optional[datetime] = Field(
         sa_column=Column(DateTime(timezone=True), index=True, server_default=func.now())
     )
 
@@ -90,11 +90,12 @@ async def messages_event_generator(
             ).all()
             if len(current_messages) > len(previous_messages):
                 if as_html:
+                    # Using the template is an advantage, but SSE can't handle encoded bytes
                     yield templates.TemplateResponse(
                         request=request,
                         name="inbox_content.html",
                         context={"messages": current_messages},
-                    )
+                    ).body.decode("utf-8")
                 else:
                     yield json.dumps(jsonable_encoder(current_messages))
 
@@ -103,6 +104,7 @@ async def messages_event_generator(
             await asyncio.sleep(STREAM_DELAY)
 
 
+# Deprecated: old endpoint not used anymore
 @app.get("/api/messages/stream", response_model=List[Message])
 async def read_messages_stream(
     request: Request, skip: int = 0, limit: int = Query(default=100, le=100)
@@ -115,6 +117,7 @@ async def read_messages_stream(
     return EventSourceResponse(event_generator, send_timeout=5)
 
 
+# Deprecated: old endpoint not used anymore
 @app.get("/api/messages/", response_model=List[Message])
 async def read_messages(skip: int = 0, limit: int = Query(default=100, le=100)):
     with Session(engine) as session:
@@ -124,6 +127,7 @@ async def read_messages(skip: int = 0, limit: int = Query(default=100, le=100)):
         return messages
 
 
+# Deprecated: old endpoint not used anymore
 @app.post("/api/messages/", response_model=Message)
 async def send_message_api(message: Message):
     with Session(engine) as session:

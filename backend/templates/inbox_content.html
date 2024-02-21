@@ -1,6 +1,7 @@
 {% for message in messages %}
 <div class="w-full md:w-1/3 border p-4 flex flex-col md:flex-row gap-4">
   <h2>{{ message.number_affected_ppl }} Personen am {{ message.address }}</h2>
-  <p>{{ message.problem}}</p>
-  <p>Am {{message.timestamp}}</p>
+  <p>Problem {{ message.problem }}</p>
+  <p>Am {{ message.timestamp }}</p>
 </div>
+{% endfor %}
