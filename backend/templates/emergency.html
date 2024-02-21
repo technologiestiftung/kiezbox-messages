@@ -1,19 +1,21 @@
 {% extends 'base.html' %} {% block title %}Notruf absetzen{% endblock %} {%
 block content %}
-<main class="flex min-h-screen flex-col items-center justify-between p-24">
+<main
+  class="flex min-h-screen flex-col items-center justify-between p-4 sm:p-24 font-mono"
+>
   <div
-    class="z-10 w-full max-w-3xl items-center justify-start font-mono text-sm flex flex-col gap-4"
+    class="z-10 w-full max-w-3xl items-center justify-start text-sm flex flex-col gap-4"
   >
-    <h1 class="text-xl">Kiezbox Notruf</h1>
-    <p>Fülle die Form aus um einen Notruf abzusetzen</p>
     <!-- Still unsure how to implement confirmation, some options listed here https://devsheet.com/htmx-send-post-request-form-submit/ -->
     <form
-      class="w-full flex flex-col items-center gap-1.5"
+      class="w-full flex flex-col items-center"
       hx-post="/messages"
       hx-swap="outerHTML"
       hx-trigger="submit"
     >
       <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
+        <h1 class="text-xl self-left">Kiezbox Notruf</h1>
+        <p class="mb-8">Fülle die Form aus um einen Notruf abzusetzen</p>
         <label
           class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           for="name"
