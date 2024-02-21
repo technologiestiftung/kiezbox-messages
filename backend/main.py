@@ -158,7 +158,7 @@ async def send_message(
     return HTMLResponse(
         """
         <div class="grid w-full max-w-sm items-center gap-1.5 mt-6">
-            <p>Ihr Notruf wurde erfolgreich abgesetzt
+            <p>Dein Notruf wurde erfolgreich abgesetzt
             </p>
         </div>
         """
