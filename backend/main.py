@@ -18,7 +18,7 @@ extra_origin = os.getenv("UVICORN_HOST")
 
 app = FastAPI(title="kiezbox-backend", openapi_url="/api/openapi.json")
 app.mount("/static", StaticFiles(directory="static"), name="static")
-# app.add_middleware(GZipMiddleware)  # enable middleware except for SSE
+# app.add_middleware(GZipMiddleware)  # TODO enable middleware except for SSE
 templates = Jinja2Templates(directory="templates")
 
 # Enable CORS
@@ -60,8 +60,8 @@ def on_startup():
     init_db()
 
 
-# Messages event generator TODO: Move to services directory
-STREAM_DELAY = 5  # In seconds TODO: Maybe move to settings
+# Messages event generator
+STREAM_DELAY = 5  # In seconds
 # STREAM_TIMEOUT = 30000  # In milliseconds
 
 
@@ -188,6 +188,7 @@ async def inbox_html_stream(
 
     return EventSourceResponse(event_generator, send_timeout=5)
 
+# The first 4 routes are used to integrate with WLAN captive portals
 @app.get("/generate_204")
 @app.get("/hotspot-detect.html")
 @app.get("/gen_204")
