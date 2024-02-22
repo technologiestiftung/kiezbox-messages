@@ -188,6 +188,7 @@ async def inbox_html_stream(
 
     return EventSourceResponse(event_generator, send_timeout=5)
 
+
 # The first 4 routes are used to integrate with WLAN captive portals
 @app.get("/generate_204")
 @app.get("/hotspot-detect.html")
