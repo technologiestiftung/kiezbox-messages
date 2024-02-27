@@ -18,7 +18,7 @@ extra_origin = os.getenv("UVICORN_HOST")
 STREAM_DELAY = int(os.getenv("STREAM_DELAY", 5))  # In seconds
 
 
-app = FastAPI(title="kiezbox-backend", openapi_url="/api/openapi.json")
+app = FastAPI(title="kiezbox-messages-app", openapi_url="/api/openapi.json")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 # app.add_middleware(GZipMiddleware)  # TODO enable middleware except for SSE
 templates = Jinja2Templates(directory="templates")

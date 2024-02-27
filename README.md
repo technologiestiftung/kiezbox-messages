@@ -25,12 +25,11 @@ The following steps are not required but recommended. This will allow you to ins
 3. Create a virtual environment with the appropriate Python version and name for your environment, for example `pyenv virtualenv 3.11 kiezbox`
 4. Activate the environment with `pyenv activate kiezbox`
 
-### Run the API
+### Run the App
 
-1. Move to the `/backend` directory.
-2. Install the required libraries with the command line `pip install -r requirements.txt`
-3. Run the server with the command line `uvicorn main:app --reload`
-4. Your terminal should show something like: 
+1. Install the required libraries with the command line `pip install -r requirements.txt`
+2. Run the server with the command line `uvicorn main:app --reload`
+3. Your terminal should show something like: 
 
 ```
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
@@ -38,7 +37,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 Open this URL with the `/docs` suffix in your server to access the Swagger documentation of the API. For this example: `http://127.0.0.1:8000/docs
 
-### Update the API
+### Update the model
 
 If you want to run an updated version of the API which introduces changes in the database models (for example, a new field), you will have to wipe the database clean first. To do this, simply delete the `backend.db` file.
 
@@ -49,8 +48,6 @@ On the JS side, the interactivity is handled by HTMX, which is shipped locally a
 We have a second JS file which is the SSE extension for HTMX. You can get the latest version from https://github.com/bigskysoftware/htmx/tree/master/dist/ext.
 
 The frontend is simple Jinja2 server-rendered templates styled with TailwindCSS.
-
-Move to the `backend` folder.
 
 Run `npm install`.
 
