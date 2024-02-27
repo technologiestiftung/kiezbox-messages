@@ -19,6 +19,7 @@ classifiers = [
 Homepage = "https://github.com/technologiestiftung/kiezbox-messages"
 Issues = "https://github.com/technologiestiftung/kiezbox-messages/issues"
 Project-Webpage = "https://gemeinsamdigital.berlin.de/de/kiezbox-daten-in-alltag-und-krise/"
+Foundation-Webpage = "https://www.technologiestiftung-berlin.de"
 
 [tool.setuptools]
 py-modules = ["main"]
