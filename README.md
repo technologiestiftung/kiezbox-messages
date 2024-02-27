@@ -44,6 +44,10 @@ If you want to run an updated version of the API which introduces changes in the
 
 ## Frontend
 
+On the JS side, the interactivity is handled by HTMX, which is shipped locally as we are in a case where phones have no internet connectivity. Currently v1.9.10 is included. See https://github.com/bigskysoftware/htmx/releases.
+
+We have a second JS file which is the SSE extension for HTMX. You can get the latest version from https://github.com/bigskysoftware/htmx/tree/master/dist/ext.
+
 The frontend is simple Jinja2 server-rendered templates styled with TailwindCSS.
 
 Move to the `backend` folder.

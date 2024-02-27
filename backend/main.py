@@ -15,6 +15,8 @@ from sse_starlette import EventSourceResponse
 
 
 extra_origin = os.getenv("UVICORN_HOST")
+STREAM_DELAY = int(os.getenv("STREAM_DELAY", 5))  # In seconds
+
 
 app = FastAPI(title="kiezbox-backend", openapi_url="/api/openapi.json")
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -58,11 +60,6 @@ def init_db():
 @app.on_event("startup")
 def on_startup():
     init_db()
-
-
-# Messages event generator
-STREAM_DELAY = 5  # In seconds
-# STREAM_TIMEOUT = 30000  # In milliseconds
 
 
 async def messages_event_generator(
