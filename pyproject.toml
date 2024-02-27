@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kiezbox-messages"
+version = "0.2"
+description = "Kiezbox Messages App to send emergency calls"
+readme = "README.md"
+requires-python = ">=3.11"
+dynamic = ["dependencies"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/technologiestiftung/kiezbox-messages"
+Issues = "https://github.com/technologiestiftung/kiezbox-messages/issues"
+Project-Webpage = "https://gemeinsamdigital.berlin.de/de/kiezbox-daten-in-alltag-und-krise/"
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+where = ["static", "templates"]
+
+[tool.setuptools.package-data]
+"*" = ["*.*"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.in"]}
