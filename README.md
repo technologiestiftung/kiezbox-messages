@@ -17,7 +17,17 @@ The backend is fastapi, using sqlmodel to unite sqlalchemy and pydantic. FastAPI
 We use a HTML form to send the emergency calls.
 We use server-sent events (SSE) to trigger reloads on the inbox.
 
-## Backend Installation guide
+## Installation guide
+
+You need Python 3.11 and we recommend you use a virtualenv. The install the app and its dependencies via:
+
+`pip install kiezbox-messages`
+
+You can then start a server from the terminal via `uvicorn main:app [-h 0.0.0.0] [-p 80]`.
+
+To use it in production, we recommend that you a service control tool like systemd or upstart.
+
+## Development guide
 
 ### Set your virtual environment
 
