@@ -1,3 +1,6 @@
+![PyPI - Version](https://img.shields.io/pypi/v/kiezbox-messages)
+![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
+
 # Kiezbox Notruf-App
 
 Tested with Python 3.11
