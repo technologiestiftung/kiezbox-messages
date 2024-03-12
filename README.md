@@ -65,3 +65,16 @@ The frontend is simple Jinja2 server-rendered templates styled with TailwindCSS.
 Run `npm install`.
 
 To watch CSS updates, you may run `npm run dev`
+
+## Release a new version
+
+Update the version string in `pyproject.toml`. Then build running `python -m build`.
+
+To upload the data to pypi, you need `pip install twine` and then run `twine upload dist/*` having set the proper credentials in `~/.pypirc`.
+
+
+## TODO
+
+One could automate the publishing of versions to PyPi, using:
+ * dynamic versioning from git tags through [setuptools-scm](https://setuptools-scm.readthedocs.io/en/latest/)
+ * [Github Actions Pypi-Publish](https://github.com/marketplace/actions/pypi-publish) following the [Python Packaging Guide](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
