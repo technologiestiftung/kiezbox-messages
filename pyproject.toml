@@ -18,6 +18,7 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/technologiestiftung/kiezbox-messages"
 Issues = "https://github.com/technologiestiftung/kiezbox-messages/issues"
+OpenCoDE-Repository = "https://gitlab.opencode.de/berlin/kiezbox/emergency-message-app"
 Project-Webpage = "https://gemeinsamdigital.berlin.de/de/kiezbox-daten-in-alltag-und-krise/"
 Foundation-Webpage = "https://www.technologiestiftung-berlin.de"
 
